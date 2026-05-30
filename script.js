@@ -26,6 +26,10 @@ function createUserDropdown() {
   });
 
   body.appendChild(userDropdown);
+
+  userDropdown.addEventListener("change", ({ target }) => {
+    console.log(`Selected user: ${target.value}`);
+  });
 }
 
 window.onload = function () {
