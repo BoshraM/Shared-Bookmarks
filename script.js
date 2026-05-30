@@ -2,13 +2,13 @@ import { getUserIds } from "./storage.js";
 
 function createUserDropdown() {
   const users = getUserIds();
-  const body = document.querySelector("body");
+  const userDropdownSection = document.querySelector("#user-dropdown-section");
 
   const label = document.createElement("label");
   label.htmlFor = "user-dropdown";
   label.textContent = "Select User: ";
-  body.appendChild(label);
-  body.appendChild(document.createElement("div"));
+  userDropdownSection.appendChild(label);
+  userDropdownSection.appendChild(document.createElement("div"));
 
   const userDropdown = document.createElement("select");
   userDropdown.id = "user-dropdown";
@@ -25,7 +25,7 @@ function createUserDropdown() {
     userDropdown.appendChild(option);
   });
 
-  body.appendChild(userDropdown);
+  userDropdownSection.appendChild(userDropdown);
 
   userDropdown.addEventListener("change", ({ target }) => {
     console.log(`Selected user: ${target.value}`);
