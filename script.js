@@ -4,27 +4,28 @@ function createUserDropdown() {
   const users = getUserIds();
   const body = document.querySelector("body");
 
-  const dropdown = document.createElement("select");
-  dropdown.id = "user-dropdown";
-
   const label = document.createElement("label");
   label.htmlFor = "user-dropdown";
   label.textContent = "Select User: ";
   body.appendChild(label);
+  body.appendChild(document.createElement("div"));
+
+  const userDropdown = document.createElement("select");
+  userDropdown.id = "user-dropdown";
 
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.text = "--Please select a user--";
-  dropdown.appendChild(defaultOption);
+  userDropdown.appendChild(defaultOption);
 
   users.forEach((userId) => {
     const option = document.createElement("option");
     option.value = userId;
     option.text = `User ${userId}`;
-    dropdown.appendChild(option);
+    userDropdown.appendChild(option);
   });
 
-  body.appendChild(dropdown);
+  body.appendChild(userDropdown);
 }
 
 window.onload = function () {
