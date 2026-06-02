@@ -35,8 +35,19 @@ function createUserDropdown() {
 const form = document.getElementById("bookmark-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  const link = document.getElementById("link").value;
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
 
-  console.log("Form submitted!");
+  const bookmark = {
+    url: link,
+    title: title,
+    desc: desc,
+    createdAt: new Date().toISOString(),
+    likes: 0,
+  };
+ 
+  console.log(bookmark);
 });
 
 window.onload = function () {
