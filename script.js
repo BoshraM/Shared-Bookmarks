@@ -32,6 +32,13 @@ function createUserDropdown() {
   });
 }
 
+const form = document.getElementById("bookmark-form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  console.log("Form submitted!");
+});
+
 window.onload = function () {
   createUserDropdown();
 };
