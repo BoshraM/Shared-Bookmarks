@@ -1,4 +1,4 @@
-import { getUserIds } from "./storage.js";
+import { getUserIds, getData, setData } from "./storage.js";
 
 let selectedUser = "";
 
@@ -38,12 +38,11 @@ function createUserDropdown() {
 const form = document.getElementById("bookmark-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-
+  
   if (!selectedUser) {
     alert("Please select a user first");
     return;
   }
-
   const link = document.getElementById("link").value;
   const title = document.getElementById("title").value;
   const desc = document.getElementById("desc").value;
@@ -56,7 +55,13 @@ form.addEventListener("submit", (event) => {
     likes: 0,
   };
  
-  console.log(bookmark);
+  const existingBookmarks = getData(selectedUser) || [];
+
+  const updatedBookmarks = [bookmark, ...existingBookmarks];
+
+  setData(selectedUser, updatedBookmarks);
+
+  console.log(updatedBookmarks);
 });
 
 window.onload = function () {
