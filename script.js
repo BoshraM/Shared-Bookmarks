@@ -38,6 +38,12 @@ function createUserDropdown() {
 const form = document.getElementById("bookmark-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  if (!selectedUser) {
+    alert("Please select a user first");
+    return;
+  }
+
   const link = document.getElementById("link").value;
   const title = document.getElementById("title").value;
   const desc = document.getElementById("desc").value;
