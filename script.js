@@ -2,6 +2,21 @@ import { getUserIds, getData, setData } from "./storage.js";
 
 let selectedUser = "";
 
+function displayBookmarks(bookmarks) {
+  const bookmarksList = document.querySelector("#bookmarks-list");
+  bookmarksList.innerHTML = "";
+
+  bookmarks.forEach((bookmark) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <h3>${bookmark.title}</h3>
+      <p>${bookmark.desc}</p>
+      <a href="${bookmark.url}" target="_blank">Visit Link</a>
+    `;
+    bookmarksList.appendChild(li);
+  });
+}
+
 function createUserDropdown() {
   const users = getUserIds();
   const userDropdownSection = document.querySelector("#user-dropdown-section");
@@ -31,14 +46,15 @@ function createUserDropdown() {
 
   userDropdown.addEventListener("change", ({ target }) => {
     selectedUser = target.value;
-    console.log(`Selected user: ${selectedUser}`);
+    const updatedBookmarks = getData(selectedUser) || [];
+    displayBookmarks(updatedBookmarks);
   });
 }
 
 const form = document.getElementById("bookmark-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  
+
   if (!selectedUser) {
     alert("Please select a user first");
     return;
@@ -54,14 +70,14 @@ form.addEventListener("submit", (event) => {
     createdAt: new Date().toISOString(),
     likes: 0,
   };
- 
+
   const existingBookmarks = getData(selectedUser) || [];
 
   const updatedBookmarks = [bookmark, ...existingBookmarks];
 
   setData(selectedUser, updatedBookmarks);
 
-  console.log(updatedBookmarks);
+  displayBookmarks(updatedBookmarks);
 });
 
 window.onload = function () {
