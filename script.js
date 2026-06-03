@@ -6,7 +6,11 @@ function displayBookmarks(bookmarks) {
   const bookmarksList = document.querySelector("#bookmarks-list");
   bookmarksList.innerHTML = "";
 
-  bookmarks.forEach((bookmark) => {
+  const sortedBookmarks = bookmarks.sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  );
+
+  sortedBookmarks.forEach((bookmark) => {
     const li = document.createElement("li");
 
     li.innerHTML = `
