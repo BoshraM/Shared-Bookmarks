@@ -27,6 +27,7 @@ function displayBookmarks(bookmarks) {
     `;
 
     const likeBtn = document.createElement("button");
+    likeBtn.type = "button";
     likeBtn.textContent = `Likes: ${bookmark.likes}`;
 
     likeBtn.addEventListener("click", () => {
@@ -36,6 +37,7 @@ function displayBookmarks(bookmarks) {
     });
 
     const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
     copyBtn.textContent = "Copy Bookmark Link";
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(bookmark.url);
