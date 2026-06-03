@@ -13,7 +13,7 @@ function displayBookmarks(bookmarks) {
   }
 
   const sortedBookmarks = bookmarks.sort(
-    (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
   );
 
   sortedBookmarks.forEach((bookmark) => {
@@ -24,6 +24,9 @@ function displayBookmarks(bookmarks) {
         <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
       </h3>
       <p>${bookmark.desc}</p>
+       <p>
+        Created at: ${new Date(bookmark.createdAt).toLocaleString()}
+      </p>
     `;
 
     const likeBtn = document.createElement("button");
