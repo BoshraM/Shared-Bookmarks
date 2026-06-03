@@ -2,6 +2,53 @@ import { getUserIds, getData, setData } from "./storage.js";
 
 let selectedUser = "";
 
+function displayBookmarks(bookmarks) {
+  const bookmarksList = document.querySelector("#bookmarks-list");
+  bookmarksList.innerHTML = "";
+
+  if (bookmarks.length === 0) {
+    bookmarksList.textContent =
+      "This user does not yet have any bookmarks. Please use the form above to add a new one.";
+    return;
+  }
+
+  const sortedBookmarks = bookmarks.sort(
+    (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  );
+
+  sortedBookmarks.forEach((bookmark) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <h3>
+        <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
+      </h3>
+      <p>${bookmark.desc}</p>
+    `;
+
+    const likeBtn = document.createElement("button");
+    likeBtn.type = "button";
+    likeBtn.textContent = `Likes: ${bookmark.likes}`;
+
+    likeBtn.addEventListener("click", () => {
+      bookmark.likes += 1;
+      setData(selectedUser, bookmarks);
+      displayBookmarks(bookmarks);
+    });
+
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.textContent = "Copy Bookmark Link";
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(bookmark.url);
+    });
+
+    li.appendChild(likeBtn);
+    li.appendChild(copyBtn);
+    bookmarksList.appendChild(li);
+  });
+}
+
 function createUserDropdown() {
   const users = getUserIds();
   const userDropdownSection = document.querySelector("#user-dropdown-section");
@@ -31,14 +78,15 @@ function createUserDropdown() {
 
   userDropdown.addEventListener("change", ({ target }) => {
     selectedUser = target.value;
-    console.log(`Selected user: ${selectedUser}`);
+    const updatedBookmarks = getData(selectedUser) || [];
+    displayBookmarks(updatedBookmarks);
   });
 }
 
 const form = document.getElementById("bookmark-form");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  
+
   if (!selectedUser) {
     alert("Please select a user first");
     return;
@@ -54,14 +102,14 @@ form.addEventListener("submit", (event) => {
     createdAt: new Date().toISOString(),
     likes: 0,
   };
- 
+
   const existingBookmarks = getData(selectedUser) || [];
 
   const updatedBookmarks = [bookmark, ...existingBookmarks];
 
   setData(selectedUser, updatedBookmarks);
 
-  console.log(updatedBookmarks);
+  displayBookmarks(updatedBookmarks);
 });
 
 window.onload = function () {
