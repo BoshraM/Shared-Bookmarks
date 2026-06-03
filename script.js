@@ -9,9 +9,8 @@ function displayBookmarks(bookmarks) {
   bookmarks.forEach((bookmark) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <h3>${bookmark.title}</h3>
+      <h3><a href="${bookmark.url}" target="_blank">${bookmark.title}</a></h3>
       <p>${bookmark.desc}</p>
-      <a href="${bookmark.url}" target="_blank">Visit Link</a>
     `;
     bookmarksList.appendChild(li);
   });
