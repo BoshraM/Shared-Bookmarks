@@ -20,12 +20,22 @@ function displayBookmarks(bookmarks) {
       <p>${bookmark.desc}</p>
     `;
 
+    const likeBtn = document.createElement("button");
+    likeBtn.textContent = `Likes: ${bookmark.likes}`;
+
+    likeBtn.addEventListener("click", () => {
+      bookmark.likes += 1;
+      setData(selectedUser, bookmarks);
+      displayBookmarks(bookmarks);
+    });
+
     const copyBtn = document.createElement("button");
     copyBtn.textContent = "Copy Bookmark Link";
     copyBtn.addEventListener("click", async () => {
       await navigator.clipboard.writeText(bookmark.url);
     });
 
+    li.appendChild(likeBtn);
     li.appendChild(copyBtn);
     bookmarksList.appendChild(li);
   });
