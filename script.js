@@ -8,10 +8,21 @@ function displayBookmarks(bookmarks) {
 
   bookmarks.forEach((bookmark) => {
     const li = document.createElement("li");
+
     li.innerHTML = `
-      <h3><a href="${bookmark.url}" target="_blank">${bookmark.title}</a></h3>
+      <h3>
+        <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
+      </h3>
       <p>${bookmark.desc}</p>
     `;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.textContent = "Copy Bookmark Link";
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(bookmark.url);
+    });
+
+    li.appendChild(copyBtn);
     bookmarksList.appendChild(li);
   });
 }
