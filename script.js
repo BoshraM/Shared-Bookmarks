@@ -6,6 +6,12 @@ function displayBookmarks(bookmarks) {
   const bookmarksList = document.querySelector("#bookmarks-list");
   bookmarksList.innerHTML = "";
 
+  if (bookmarks.length === 0) {
+    bookmarksList.textContent =
+      "This user does not yet have any bookmarks. Please use the form above to add a new one.";
+    return;
+  }
+
   const sortedBookmarks = bookmarks.sort(
     (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
   );
