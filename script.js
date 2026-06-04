@@ -1,4 +1,5 @@
 import { getUserIds, getData, setData } from "./storage.js";
+import { buildUpdatedBookmarks } from "./buildUpdatedBookmarks.js";
 
 let selectedUser = "";
 
@@ -86,40 +87,34 @@ function createUserDropdown() {
   });
 }
 
-function createForm() {
-  const form = document.getElementById("bookmark-form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+function handleFormSubmit(event) {
+  event.preventDefault();
 
-    if (!selectedUser) {
-      alert("Please select a user first");
-      return;
-    }
-    const link = document.getElementById("link").value;
-    const title = document.getElementById("title").value;
-    const desc = document.getElementById("desc").value;
+  if (!selectedUser) {
+    alert("Please select a user first");
+    return;
+  }
+  const link = document.getElementById("link").value;
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
 
-    const bookmark = {
-      url: link,
-      title: title,
-      desc: desc,
-      createdAt: new Date().toISOString(),
-      likes: 0,
-    };
+  const existingBookmarks = getData(selectedUser) || [];
 
-    const existingBookmarks = getData(selectedUser) || [];
+  const updatedBookmarks = buildUpdatedBookmarks(
+    existingBookmarks,
+    link,
+    title,
+    desc
+  );
 
-    const updatedBookmarks = [bookmark, ...existingBookmarks];
+  setData(selectedUser, updatedBookmarks);
 
-    setData(selectedUser, updatedBookmarks);
+  displayBookmarks(updatedBookmarks);
+};
 
-    displayBookmarks(updatedBookmarks);
-  });
-}
+const form = document.getElementById("bookmark-form");
+form.addEventListener("submit", handleFormSubmit);
 
 window.onload = function () {
   createUserDropdown();
-  createForm();
 };
-
-export { displayBookmarks, createUserDropdown };
