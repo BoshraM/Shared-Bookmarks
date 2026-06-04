@@ -62,4 +62,16 @@ describe("createUserDropdown()", () => {
     const options = document.querySelectorAll("#user-dropdown option");
     expect(options).toHaveLength(6);
   });
+
+  test("sets correct value and label on each user option", () => {
+    getUserIds.mockReturnValue(["42", "99"]);
+
+    createUserDropdown();
+
+    const options = document.querySelectorAll("#user-dropdown option");
+    expect(options[1].value).toBe("42");
+    expect(options[1].text).toBe("User 42");
+    expect(options[2].value).toBe("99");
+    expect(options[2].text).toBe("User 99");
+  });
 });
