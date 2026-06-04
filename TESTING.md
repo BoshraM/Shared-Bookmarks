@@ -11,11 +11,11 @@
 
 2. Selecting a user must display the list of bookmarks for the relevant user
    Test: Manual testing
-   Screenshot
+   ![Correct user's bookmarks displayed](./screenshots/Correct%20User's%20Bookmarks%20Screenshot.png)
 
 3. If there are no bookmarks for the selected user, a message is displayed to explain this
    Test: Manual testing
-   Screenshot
+   ![No bookmarks message](./screenshots/No%20Bookmarks%20Message.png)
 
 4. The list of bookmarks must be shown in reverse chronological order
    Test: Manual testing
@@ -35,7 +35,7 @@
 
 8. The website must contain a form with inputs for a URL, a title, and a description. The form should have a submit button.
    Test: Manual testing
-   Screenshot
+   ![New Bookmark Form](./screenshots/Booksmarks%20Form.png)
 
 9. Submitting the form adds a new bookmark for the relevant user only
    Test: Manual testing
@@ -43,11 +43,11 @@
 
 10. After creating a new bookmark, the list of bookmarks for the current user is shown, including the new bookmark
     Test: Manual
-    Screenshot
+    Manually added bookmarks to different users to verify they are curectly displayed.
 
 11. The website must score 100 for accessibility in Lighthouse
     Test: Manual Testing (Goodle Chrome Lighthouse)
-    Screenshot
+    ![Lighthouse Scoring](./screenshots/Lighthouse%20Screenshot.png)
 
 12. Unit tests must be written for at least one non-trivial function
     Test: Unit tests in script.test.js
