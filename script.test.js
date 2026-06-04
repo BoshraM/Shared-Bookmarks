@@ -87,4 +87,21 @@ describe("createUserDropdown()", () => {
 
     expect(getData).toHaveBeenCalledWith("7");
   });
+
+  test("calls getData with an empty string when the placeholder option is re-selected", () => {
+    getUserIds.mockReturnValue(["7"]);
+    getData.mockReturnValue([]);
+
+    createUserDropdown();
+
+    const select = document.querySelector("#user-dropdown");
+
+    select.value = "7";
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+
+    select.value = "";
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+
+    expect(getData).toHaveBeenLastCalledWith("");
+  });
 });
