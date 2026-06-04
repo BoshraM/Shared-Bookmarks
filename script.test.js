@@ -53,4 +53,13 @@ describe("createUserDropdown()", () => {
     expect(options[0].value).toBe("");
     expect(options[0].text).toBe("--Please select a user--");
   });
+
+  test("renders one <option> per user returned by getUserIds()", () => {
+    getUserIds.mockReturnValue(["1", "2", "3", "4", "5"]);
+
+    createUserDropdown();
+
+    const options = document.querySelectorAll("#user-dropdown option");
+    expect(options).toHaveLength(6);
+  });
 });
