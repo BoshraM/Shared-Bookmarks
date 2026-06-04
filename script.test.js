@@ -32,4 +32,14 @@ describe("createUserDropdown()", () => {
     expect(label.htmlFor).toBe("user-dropdown");
     expect(label.textContent).toBe("Select User: ");
   });
+
+  test("adds a <select> element with id 'user-dropdown'", () => {
+    getUserIds.mockReturnValue([]);
+
+    createUserDropdown();
+
+    const select = document.querySelector("#user-dropdown");
+    expect(select).not.toBeNull();
+    expect(select.tagName).toBe("SELECT");
+  });
 });
