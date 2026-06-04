@@ -86,35 +86,40 @@ function createUserDropdown() {
   });
 }
 
-const form = document.getElementById("bookmark-form");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+function createForm() {
+  const form = document.getElementById("bookmark-form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  if (!selectedUser) {
-    alert("Please select a user first");
-    return;
-  }
-  const link = document.getElementById("link").value;
-  const title = document.getElementById("title").value;
-  const desc = document.getElementById("desc").value;
+    if (!selectedUser) {
+      alert("Please select a user first");
+      return;
+    }
+    const link = document.getElementById("link").value;
+    const title = document.getElementById("title").value;
+    const desc = document.getElementById("desc").value;
 
-  const bookmark = {
-    url: link,
-    title: title,
-    desc: desc,
-    createdAt: new Date().toISOString(),
-    likes: 0,
-  };
+    const bookmark = {
+      url: link,
+      title: title,
+      desc: desc,
+      createdAt: new Date().toISOString(),
+      likes: 0,
+    };
 
-  const existingBookmarks = getData(selectedUser) || [];
+    const existingBookmarks = getData(selectedUser) || [];
 
-  const updatedBookmarks = [bookmark, ...existingBookmarks];
+    const updatedBookmarks = [bookmark, ...existingBookmarks];
 
-  setData(selectedUser, updatedBookmarks);
+    setData(selectedUser, updatedBookmarks);
 
-  displayBookmarks(updatedBookmarks);
-});
+    displayBookmarks(updatedBookmarks);
+  });
+}
 
 window.onload = function () {
   createUserDropdown();
+  createForm();
 };
+
+export { displayBookmarks, createUserDropdown };
