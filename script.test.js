@@ -74,4 +74,17 @@ describe("createUserDropdown()", () => {
     expect(options[2].value).toBe("99");
     expect(options[2].text).toBe("User 99");
   });
+
+  test("calls getData with the selected user id when dropdown changes", () => {
+    getUserIds.mockReturnValue(["7"]);
+    getData.mockReturnValue([]);
+
+    createUserDropdown();
+
+    const select = document.querySelector("#user-dropdown");
+    select.value = "7";
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+
+    expect(getData).toHaveBeenCalledWith("7");
+  });
 });
