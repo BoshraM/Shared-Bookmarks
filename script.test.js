@@ -42,4 +42,15 @@ describe("createUserDropdown()", () => {
     expect(select).not.toBeNull();
     expect(select.tagName).toBe("SELECT");
   });
+
+  test("sets a default placeholder option as the first option", () => {
+    getUserIds.mockReturnValue([]);
+
+    createUserDropdown();
+
+    const options = document.querySelectorAll("#user-dropdown option");
+    expect(options).toHaveLength(1);
+    expect(options[0].value).toBe("");
+    expect(options[0].text).toBe("--Please select a user--");
+  });
 });
