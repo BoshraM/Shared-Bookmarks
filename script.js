@@ -24,9 +24,9 @@ function displayBookmarks(bookmarks) {
         <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
       </h3>
       <p>${bookmark.desc}</p>
-       <p>
+       <small class="small">
         Created at: ${new Date(bookmark.createdAt).toLocaleString()}
-      </p>
+       </small>
     `;
 
     const likeBtn = document.createElement("button");
