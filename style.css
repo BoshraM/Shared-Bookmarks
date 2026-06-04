@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +10,7 @@ body {
   color: #274c77;
   line-height: 1.5;
 }
+
 
 header {
   background-color: #ffffff;
@@ -43,6 +45,7 @@ form {
   padding: 16px;
   border: 1px solid #a3cef1;
   border-radius: 6px;
+  
 }
 
 label {
@@ -56,8 +59,7 @@ form div {
   flex-direction: column;
 }
 
-input,
-select {
+input, select {
   padding: 8px;
   border: 1px solid #a3cef1;
   border-radius: 4px;
